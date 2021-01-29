@@ -7,214 +7,95 @@ if ($CFG->forcelogin) {
 }
 
 $site = get_site();
-$PAGE->set_context($context);
 $PAGE->set_pagelayout('admin');
 $PAGE->set_title($title);
 $PAGE->set_heading($fullname);
-$PAGE->blocks->add_region('content');
 echo $OUTPUT->header();
+?>
+<head><link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></head>
+<?php
 
 
-$sql="select 
-    c.id AS 'courseid',
-    c.fullname AS 'coursename',
-    From_unixtime(ue.timestart) AS 'tiempoini',
-    From_unixtime(ue.timeend) AS 'tiempofin',
-    NOW() AS 'fechaact',
-    IFNULL((SELECT 
-                    COUNT(cmm.id)
-                FROM
-                     {course_modules_completion} cmm
-                        JOIN
-                     {course_modules} mcm ON mcm.id = cmm.coursemoduleid
-                WHERE
-                    cmm.userid = u.id AND mcm.course = c.id
-                        AND mcm.visible = 1),
-            0) AS 'activitiescompleted',
-    IFNULL((SELECT 
-                    COUNT(cmc.id)
-                FROM
-                     {course_modules} cmc
-                WHERE
-                    cmc.course = c.id
-                        AND cmc.completion IN (1 , 2)
-                        AND cmc.visible = 1),
-            0) AS 'activitiesassigned',
-    (SELECT 
-            IF(activitiesassigned != 0,
-                    (SELECT 
-                            IF(activitiescompleted = activitiesassigned,
-                                    'finalizado',
-                                    'nofinalizado')
-                        ),
-                    'n/a')
-        ) AS 'estatus',
-    (SELECT
-           IF(tiempofin != '1969-12-31 18:00:00',
-                   (SELECT
-                           IF(tiempofin > fechaact,
-                                   'vigente',
-                                   'novigente')
-                       ),
-                   'sinfin')
-       ) AS 'vigencia'
-FROM
-     {user} u
-		JOIN
-     {user_enrolments} ue ON ue.userid = u.id
-        JOIN
-     {enrol} e ON e.id = ue.enrolid
-        JOIN
-     {course} c ON c.id = e.courseid
-        JOIN
-     {course_categories} cc ON cc.id = c.category
-        JOIN
-     {context} AS ctx ON ctx.instanceid = c.id
-        JOIN
-     {role_assignments} AS ra ON ra.contextid = ctx.id
-        JOIN
-     {role} AS r ON r.id = e.roleid
-WHERE
-    ra.userid = u.id
-        AND ctx.instanceid = c.id
-        AND ra.roleid = 5
-        AND c.visible = 1 
-        AND u.id = ?
-GROUP BY u.id , c.id , u.lastname , u.firstname , c.fullname , ue.timestart, tiempofin";
+$sql="select c.id, CONCAT(cc.name,' - ',c.fullname) AS 'coursename', c.category, c.sortorder,curdate() as diaactual, FROM_UNIXTIME(ue.timestart, '%Y-%m-%d') as 'diferencia',
+datediff(curdate() , FROM_UNIXTIME(ue.timestart, '%Y-%m-%d')) as dif, c.shortname, c.fullname, c.idnumber, c.startdate, c.visible, c.groupmode, c.groupmodeforce, c.cacherev, u.lastaccess,
+IFNULL((SELECT COUNT(cmm.id) FROM {course_modules_completion} cmm JOIN {course_modules} mcm ON mcm.id = cmm.coursemoduleid WHERE cmm.userid = u.id AND mcm.course = c.id AND mcm.visible = 1), 0) AS 'activitiescompleted',
+IFNULL((SELECT COUNT(cmc.id) FROM {course_modules} cmc WHERE cmc.course = c.id AND cmc.completion IN (1 , 2) AND cmc.visible = 1), 0) AS 'activitiesassigned',
+(SELECT IF(activitiesassigned != 0,(SELECT IF(activitiescompleted = activitiesassigned,'finalizado','nofinalizado')),'n/a')) AS 'estatus' ,c.daysobj
+FROM {user} u JOIN {user_enrolments} ue ON ue.userid = u.id JOIN {enrol} e ON e.id = ue.enrolid JOIN {course} c ON c.id = e.courseid JOIN {course_categories} cc ON cc.id = c.category
+JOIN {context} AS ctx ON ctx.instanceid = c.id JOIN {role_assignments} AS ra ON ra.contextid = ctx.id JOIN {role} AS r ON r.id = e.roleid
+WHERE ra.userid = u.id AND ctx.instanceid = c.id AND ra.roleid = 5 AND c.visible = 1  AND u.id = ? AND UNIX_TIMESTAMP(curdate()) < ue.timeend
+GROUP BY u.id , c.id , u.lastname , u.firstname , c.fullname , ue.timestart order by cc.id ASC";
 
 $records = $DB->get_records_sql($sql, array($USER->id));
-//echo "hola".count($records);
-$k=$j=$i=0;
+
+/*obtener total de cursos del ususario*/
+/*Obtener total de cursos finalizados*/
+$i=0;
+$j=0;
+$k=0;
 foreach ($records as $value) {
 
-    $curso=$value->courseid;
+   $curso=$value->id;
 
-    if($value->estatus =='finalizado'){
+   if($value->estatus =='finalizado'){
 
+    $finalizados=$finalizados.'<p style="font-size:12px;"><a target="_blank" href="'.$CFG->wwwroot.'/course/view.php?id='.$curso.'">'.$value->coursename.'</a><p>';
+     $i=$i+1;
+     
+   }else if($value->estatus =='nofinalizado'){
 
-      $i=$i+1;
-      
-    } elseif($value->estatus =='nofinalizado')
-    {
-      $j=$j+1;
-    }else{}
-}
+     $difdias=$value->dif;
+     $diasestablecidos=$value->daysobj;
+
+     if($diasestablecidos>=$difdias){
+       $k=$k+1;
+       $enproceso=$enproceso.'<p style="font-size:12px;"><a target="_blank" href="'.$CFG->wwwroot.'/course/view.php?id='.$curso.'">'.$value->coursename.'</a><p>';
+     }else{
+       $j=$j+1;
+       $nofinalizados=$nofinalizados.'<p style="font-size:12px;"><a target="_blank" href="'.$CFG->wwwroot.'/course/view.php?id='.$curso.'">'.$value->coursename.'</a><p>';
+
+     }
+
+   }else{
+
+   }
 
 $totalfin = $i;
 $totalnfi = $j;
-
- 
-$finalizados=$sinfin=$nofinalizados=' ';
-$vigente=$novigente=' ';
-
-foreach ($records as $valueids) {
-
-    $idcurso=$valueids->courseid;
- if($valueids->estatus =='nofinalizado'){
-      //$nofinalizados=$nofinalizados.'<p><a target="_blank" href="'.$CFG->wwwroot.'/course/view.php?id='.$idcurso.'">'.$valueids->coursename.'</a><p>';
-       if($valueids->vigencia =='sinfin')//SIn fecha de expiración, y vigente
-        {
-          $sinfin=$sinfin.'<li><p><a target="_blank" href="'.$CFG->wwwroot.'/course/view.php?id='.$idcurso.'">'.$valueids->coursename.'</a><p></li>';
-        }elseif($valueids->vigencia =='novigente')//No finalizado y ya no vigente
-          {
-            $novigente=$novigente.'<li><p><a target="_blank" href="'.$CFG->wwwroot.'/course/view.php?id='.$idcurso.'">'.$valueids->coursename.'</a><p></li>';
-          }
-        else
-          {//No lo finalizo y esta vigente
-            $vigente=$vigente.'<li><p><a target="_blank" href="'.$CFG->wwwroot.'/course/view.php?id='.$idcurso.'">'.$valueids->coursename.'</a><p></li>';
-          }
-      }elseif($valueids->estatus =='finalizado')
-          {
-            $finalizados=$finalizados.'<li><p><a target="_blank" href="'.$CFG->wwwroot.'/course/view.php?id='.$idcurso.'">'.$valueids->coursename.'</a><p></li>';//Cursos finalizados
-          }else{
-
-          }
-
+$totalp=$k;
 }
 
-  echo "<style>
-  #grafico {
-	//height:; 
-	width:33%;
-	float: right;
-  }
- 
-  #reporteCursos{
-    display: inline-block; /* the default for span */
-  	width: 33%;
-  	float: left;
-  }	
-	#encurso{
-	//display: inline; /* the default for span */
-  	width: 33%;
-  	/*float: right;*/
-    /*height:100%;*/
-    display: inline-block;
-}
-@media (max-width: 768px) {
-    #encurso, #reporteCursos{
-        display: block;
-    }
-    #encurso, #reporteCursos{
-      flex: unset;
-    }
-    #encurso{
-      float: left;
-  }
-}
-/*@media (min-height: 450px){
-	.chartjs-render-monitor{
-		width:720px;
-		height:360px;
-	}
-}*/
-
-</style>";  
- 
-  echo "<div class='chart-area'>";
-  	echo "<div id='reporteCursos'>";
-  		echo "<div id='vista1'><h2 style='font-size:15px; color:#000!important;'>Cursos No Finalizados</h2><p style='padding-right: 15px;'>Al completar los cursos Pendientes Fuera de Tiempo, no acumularás monedas. <br>Sin embargo, es importante que concluyas debido a que será considerado para tu evaluación de desempeño.</p>";
-
-  		echo "<div id='vista2'><h2 style='font-size:15px;'>En curso</h2>";
-  		echo "<ul>$vigente</ul>";
-  		echo "<ul>$sinfin</ul>";
-
-
-  		echo "<br><h2 style='font-size:15px;'>Pendientes por finalizar</h2><ul>$novigente</ul></div>";
-  //echo "</div>";
-  //echo "<div class='reporteCursos'>"; 
-
-  	echo "</div></div>";
-  	echo "<div id='encurso'>";
-  		echo "<div id='vista3'><h2 style='font-size:15px; color:#000!important;'>Cursos Finalizados</h2>";
-  		echo "<ul>$finalizados</ul>";
-  		echo "</div><div id='vista4'>";
-
-$finaltotal = count($records);
-//echo"<div class='chart-container' style='position: relative; height:40vh; width:80vw'>";
-//echo"<canvas id='chart'></canvas>";
-
-/*echo "<div id='row-fluid'>";*/
- 
-echo "</div></div>";
-$chart = new core\chart_pie();
-echo "<div id='grafico'>";
-$s = new \core\chart_series("Cursos", [$totalfin,$totalnfi]);
-$s->set_labels([$totalfin,$totalnfi]);
-$chart->add_series($s);
-$chart->set_labels(["Cursos finalizados", "Cursos no finalizados"]);
-$chart->set_doughnut(true);
-print($OUTPUT->render($chart));
-echo "</div></div>";
+  echo '<div class="w3-container w3-center" style="background-color:#e79888;">
+            <h2 style="color: #fff;">Mi progreso</h2>
+        </div>
+        <div class="w3-row">
+          <div class="w3-col s4">
+          <h3 class="w3-center" style="background-color:#de2320; color: #fff;">Cursos No Finalizados</h3>
+            <p>'.$nofinalizados.'</p>
+          </div>
+          <div class="w3-col s4">
+            <h3 class="w3-center" style="background-color:#ffbc00; color: #fff;">En progreso</h3>
+            <p>'.$enproceso.'</p>
+          </div>
+          <div class="w3-col s4">
+            <h3 class="w3-center" style="background-color:#6ecc12; color: #fff;">Cursos Finalizados</h3>
+            <p>'.$finalizados.'</p>
+          </div>
+        </div>';
+  
 /*
+$finaltotal = count($records);
+echo "<div class='grafico' >";
 $chart = new core\chart_pie();
-
 $s = new \core\chart_series("Cursos", [$totalfin,$totalnfi]);
 $s->set_labels([$totalfin,$totalnfi]);
 $chart->add_series($s);
 $chart->set_labels(["Cursos finalizados", "Cursos no finalizados"]);
 $chart->set_doughnut(true);
 print($OUTPUT->render($chart)); 
+echo "</div>";
+*/
+
 
 /*$PAGE->set_context($context);
 $PAGE->set_url('/my/index.php', $params);
