@@ -27,6 +27,20 @@ class block_miprogreso extends block_base {
 
 $records = $DB->get_records_sql($sql, array($USER->id));
 
+$esql="select u.id, 
+MAX(IF(f.shortname='Perfil', d.data, NULL)) as perfil
+from {user} u 
+join {user_info_data} d on d.userid=u.id
+join {user_info_field} f on f.id=d.fieldid
+where  u.id=?";
+$inforol = $DB->get_records_sql($esql, array($USER->id));
+foreach($inforol as $valrol){
+
+  $rolusuario=$valrol->perfil;
+}
+
+
+
 /*obtener total de cursos del ususario*/
 /*Obtener total de cursos finalizados*/
 $i=0;
@@ -72,11 +86,74 @@ $chart->set_doughnut(true);
 $this->content->text .= $OUTPUT->render($chart);
 */
 
-$this->content->text .='<div class="chart-container"><canvas id="pie-chart-daniel"></canvas></div>';
+$sumatotal=$totalp+$totalnfi+$totalfin;
+
+/*$this->content->text .='<div class="chart-container"><canvas id="pie-chart-daniel"></canvas></div>';
 $this->content->text .='<p>Total cursos:  '.$finaltotal.'</p>';
 $this->content->text .='<p>Cursos  En proceso:  '.$totalp.'</p>';
 $this->content->text .='<p>Cursos  No Finalizados:  '.$totalnfi.'</p>';
 $this->content->text .='<p>Cursos Finalizados:  '.$totalfin.'</p>';
+*/
+$promedio1 = ($totalp * 100) /  $sumatotal;
+$promedio2 = ($totalnfi * 100) /  $sumatotal;
+$promedio3 = ($totalfin * 100) /  $sumatotal;
+
+$promedio1=round($promedio1, 2);
+$promedio2=round($promedio2, 2);
+$promedio3=round($promedio3, 2);
+
+
+
+$this->content->text .='<h3 style="text-align: center;">Cursos</h3><div><div class="progress" style="height: 20px; background-color: #f3f2f1 !important;">
+  <div
+    class="progress-bar"
+    role="progressbar"
+    style="width: '.$promedio1.'%; background-color: #ffeb3b;"
+    aria-valuenow="'.$totalp.'"
+    aria-valuemin="0"
+    aria-valuemax="'.$sumatotal.'"
+  >
+  '.$totalp.'
+  </div>
+</div>
+<div style="top: -19px; position: relative; text-align: center; font-size: 17px;"><a style="color: #636363" href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php">En proceso</a></div>
+</div>';
+$this->content->text .='<div><div class="progress" style="height: 20px; background-color: #f3f2f1 !important;">
+  <div
+    class="progress-bar"
+    role="progressbar"
+    style="width: '.$promedio2.'%; background-color: #f44336;"
+    aria-valuenow="'.$totalnfi.'"
+    aria-valuemin="0"
+    aria-valuemax="'.$sumatotal.'"
+  >
+  '.$totalnfi.'
+  </div>
+</div>
+<div style="top: -19px; position: relative; text-align: center; font-size: 17px;"><a style="color: #636363" href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php">No finalizado</a></div>
+</div>';
+$this->content->text .='<div><div class="progress" style="height: 20px; background-color: #f3f2f1  !important;">
+  <div
+    class="progress-bar"
+    role="progressbar"
+    style="width: '.$promedio3.'%; background-color: #4caf50;"
+    aria-valuenow="'.$totalfin.'"
+    aria-valuemin="0"
+    aria-valuemax="'.$sumatotal.'"
+  >
+  '.$totalfin.'
+  </div>
+</div>
+<div style="top: -19px; position: relative; text-align: center; font-size: 17px;"><a style="color: #636363" href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php">Finalizado</a></div>
+</div>';
+if($rolusuario=='JEFE INMEDIATO'){
+$this->content->text .='<div style="top: -19px; position: relative; text-align: center; font-size: 17px;">
+<a style="color: #636363" href="'.$CFG->wwwroot.'/blocks/miprogreso/team.php"><i class="glyphicon glyphicon-user" style="color:#e69987"></i>  Seguimiento a mi equipo</a></div>
+</div>';
+}
+
+
+/*
 $this->content->text .='<div><div><a href="'.$CFG->wwwroot.'/blocks/miprogreso/detalles.php">Consultar detalles...</a></div><div>';
 $this->content->text .='<link rel="stylesheet" href="'.$CFG->wwwroot.'/blocks/miprogreso/css/Chart.css"><script src="'.$CFG->wwwroot.'/blocks/miprogreso/js/Chart.js" type="text/javascript"></script><script>
 new Chart(document.getElementById("pie-chart-daniel"), {
@@ -108,7 +185,7 @@ new Chart(document.getElementById("pie-chart-daniel"), {
   
 
 </script>';
-
+*/
 /*foreach ($records as $valueids) {
 
     $idcurso=$valueids->courseid;

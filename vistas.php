@@ -1,4 +1,19 @@
 <?php 
+$estilos="<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Mi progreso</title>
+<link rel='stylesheet' href='css/style.css' type='text/css'/>
+<link rel='stylesheet' href='css/w3.css' type='text/css'/>
+<script src='js/miprogreso.js'></script>
+</head>";
+
+$cabeceraprincipal='<div class="w3-container w3-center">
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php" class="w3-btn w3-green">Finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php" class="w3-btn w3-yellow">En proceso</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php" class="w3-btn w3-red">No finalizado</a>
+</div>';
 
 $cabezerafinalizados="<div class='w3-row'>
 						<div class='w3-col s12 w3-center'>
@@ -19,592 +34,45 @@ $cabezerafinalizados="<div class='w3-row'>
 					   
 
 $cabeceranofinalizados="<div class='w3-row'>
-<!--<div class='w3-col s12 w3-center'>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-</div>-->
-<div class='w3-col s1 w3-red w3-center w3-border w3-round'>
-   <p>&nbsp;</p>
-</div>
-<div class='w3-col s11 w3-container'>
-   <h4>Cursos no finalizados</h4>
-</div>
-</div>
-<div class='w3-col s12 w3-center'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-</div>
-";
+							<!--<div class='w3-col s12 w3-center'>
+								<p>&nbsp;</p>
+								<p>&nbsp;</p>
+							</div>-->
+							<div class='w3-col s1 w3-red w3-center w3-border w3-round'>
+							<p>&nbsp;</p>
+							</div>
+							<div class='w3-col s11 w3-container'>
+							<h4>Cursos no finalizados</h4>
+							</div>
+							</div>
+							<div class='w3-col s12 w3-center'>
+									<p>&nbsp;</p>
+									<p>&nbsp;</p>
+							</div>
+							";
 
 $cabeceraenproceso="<div class='w3-row'>
-<!--<div class='w3-col s12 w3-center'>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-</div>-->
-<div class='w3-col s1 w3-yellow w3-center w3-border w3-round'>
-   <p>&nbsp;</p>
-</div>
-<div class='w3-col s11 w3-container'>
-   <h4>Cursos en proceso</h4>
-</div>
-</div>
-<div class='w3-col s12 w3-center'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-</div>
-";
+						<!--<div class='w3-col s12 w3-center'>
+							<p>&nbsp;</p>
+							<p>&nbsp;</p>
+						</div>-->
+						<div class='w3-col s1 w3-yellow w3-center w3-border w3-round'>
+						<p>&nbsp;</p>
+						</div>
+						<div class='w3-col s11 w3-container'>
+						<h4>Cursos en proceso</h4>
+						</div>
+						</div>
+						<div class='w3-col s12 w3-center'>
+								<p>&nbsp;</p>
+								<p>&nbsp;</p>
+						</div>
+						";
 
-$espacio_responsivo="<div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-      <p>&nbsp;</p>
-     </div>";
-
-
-$estilos="<!DOCTYPE html>
-<html>
-<head>
-	<meta charset='utf-8'>
-<title>Mi progreso V2</title>
-<style type='text/css'>
-.punteado{
-  border: 1px dashed #cccccc;
-  margin-bottom: 10%;
-}
-.content-block {
-     position: relative;
-}
-.content-block img{
-     left: 50%; bottom: 0;
-     padding-bottom: 10%;
-     width: 150px; height: 150px; margin: -16%;
-}
-.cursos{
-	padding: 20px;
-}
-.ajustado{
-display:flex;
-flex-wrap: wrap;
-//padding-bottom:20%;
-}
-
-@media (max-width: 600px) {
-	.ajustado{
-		display:block !important;
-		padding-bottom:20%;
-		padding-top:5%;
-		}
-  }
+$espacio_responsivo="<div class='resposivo-espacio'></div>";
+		
+$teamtitulo='<div class="w3-container w3-center">
+<h2>Seguimiento a mi equipo</h2>
+</div>';
 
 
-</style>
-</head>
-<link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css'>";
-
-$formato="<body>
-<div class='w3-row'>
-<div class='w3-col s12 w3-center'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-</div>
-  <div class='w3-col s1 w3-green w3-center w3-border w3-round'>
-    <p>&nbsp;</p>
-  </div>
-  <div class='w3-col s11 w3-container'>
-    <h4>Cursos finalizados</h4>
-  </div>
-</div>
-<div class='w3-col s12 w3-center'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-</div>
-<div class='w3-container'>
-	<div class='w3-row ajustado'>
-	  <div class='w3-col s12 m4 l4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-66.png' alt='Lights' >
-	  	<div class='cursos'><p>Curso 1</p>
-	  		<p>Curso 2</p>
-			  <p>Curso 3</p>
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div><!--
-	  <div class='w3-col s12 m4 l4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-71.png' alt='Lights' >
-		<div class='cursos'>	
-			<p>Curso 4</p>
-			<p>Curso 5</p>  	
-			<p>Curso 6</p>
-			<p>Curso 2</p>
-			<p>Curso 3</p>
-		</div>
-	  </div>-->
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	  	<p>&nbsp;</p>
-	  	<p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 l4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-70.png' alt='Lights' >
-		  <div class='cursos'>
-		  	<p>Curso 2</p>
-	  		<p>Curso 3</p>
-	  	  </div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	  	<p>&nbsp;</p>
-	  	<p>&nbsp;</p>
-	  </div>
-	  <!--<div class='w3-col s12 w3-center'>
-	  	<p>&nbsp;</p>
-	  	<p>&nbsp;</p>
-	  </div>-->
-
-	  <!--codigo 2-->
-	  <div class='w3-col s12 m4 l4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-68.png' alt='Lights' >
-	  	<div class='cursos'>
-	  		<p>Curso 7</p>
-	  		<p>Curso 8</p>
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 l4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-67.png' alt='Lights' >
-		<div class='cursos'>
-			<p>Curso 9</p>
-		</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 l4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-69.png' alt='Lights'>
-	  	<div class='cursos'>
-	  		<p>Curso 10</p>
-	  	</div>
-	  </div>
-
-	</div><!--
-	<div class='w3-row ajustado'>
-	  <div class='w3-col s12 m4 l4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-68.png' alt='Lights' >
-	  	<div class='cursos'>
-	  		<p>Curso 7</p>
-	  		<p>Curso 8</p>
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 l4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-67.png' alt='Lights' >
-		<div class='cursos'>
-			<p>Curso 9</p>
-		</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 l4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-69.png' alt='Lights'>
-	  	<div class='cursos'>
-	  		<p>Curso 10</p>
-	  	</div>
-	  </div>
-	</div>-->
-</div>
-<!--En proceso-->
-<div class='w3-row'>
-<!--<div class='w3-col s12 w3-center'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-</div>-->
-  <div class='w3-col s1 w3-yellow w3-center w3-border w3-round'>
-    <p>&nbsp;</p>
-  </div>
-  <div class='w3-col s11 w3-container'>
-    <h4>Cursos finalizados</h4>
-  </div>
-</div>
-<div class='w3-col s12 w3-center'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-</div>
-<div class='w3-container'>
-	<div class='w3-row ajustado'>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-66.png' alt='Lights' >
-	  	<div class='cursos'><p>Curso 1</p>
-	  		<p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>		  
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-71.png' alt='Lights' >
-		<div class='cursos'>	
-			<p>Curso 4</p>
-			<p>Curso 5</p>  	
-			<p>Curso 6</p>
-			<p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>	  
-		</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	  	<p>&nbsp;</p>
-	  	<p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-70.png' alt='Lights' >
-		  <div class='cursos'>
-		  	<p>Curso 2</p>
-	  		<p>Curso 3</p>
-	  	  </div>
-	  </div>
-	</div>
-	<div class='w3-row ajustado'>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-68.png' alt='Lights' >
-	  	<div class='cursos'>
-	  		<p>Curso 7</p>
-	  		<p>Curso 8</p>
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-67.png' alt='Lights' >
-		<div class='cursos'>
-			<p>Curso 9</p>
-		</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-69.png' alt='Lights'>
-	  	<div class='cursos'>
-	  		<p>Curso 10</p>
-	  	</div>
-	  </div>
-	</div>
-</div>
-<!--Cursos no finalizados-->
-<div class='w3-row'>
-  <div class='w3-col s1 w3-red w3-center w3-border w3-round'>
-    <p>&nbsp;</p>
-  </div>
-  <div class='w3-col s11 w3-container'>
-    <h4>Cursos no finalizados</h4>
-  </div>
-</div>
-<div class='w3-col s12 w3-center'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-</div>
-<div class='w3-container'>
-	<div class='w3-row ajustado'>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-66.png' alt='Lights' >
-	  	<div class='cursos'><p>Curso 1</p>
-	  		<p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>		  
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-71.png' alt='Lights' >
-		<div class='cursos'>	
-			<p>Curso 4</p>
-			<p>Curso 5</p>  	
-			<p>Curso 6</p>
-			<p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>
-			  <p>Curso 2</p>
-			  <p>Curso 3</p>	  
-		</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	  	<p>&nbsp;</p>
-	  	<p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-70.png' alt='Lights' >
-		  <div class='cursos'>
-		  	<p>Curso 2</p>
-	  		<p>Curso 3</p>
-	  	  </div>
-	  </div>
-	</div>
-	<div class='w3-row ajustado'>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-68.png' alt='Lights' >
-	  	<div class='cursos'>
-	  		<p>Curso 7</p>
-	  		<p>Curso 8</p>
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-67.png' alt='Lights' >
-		<div class='cursos'>
-			<p>Curso 9</p>
-		</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	    <p>&nbsp;</p>
-	    <p>&nbsp;</p>
-	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-69.png' alt='Lights'>
-	  	<div class='cursos'>
-	  		<p>Curso 10</p>
-	  	</div>
-	  </div>
-	</div>
-</div>
-</body>";
-
-$var="
-<!--Cursos en proceso-->
-<div class='w3-row'>
-  <div class='w3-col s1 w3-yellow w3-center w3-border w3-round'>
-    <p>&nbsp;</p>
-  </div>
-  <div class='w3-col s11 w3-container'>
-    <h4>En proceso </h4>
-  </div>
-</div>
-<br>
-<br>
-<div class='w3-container'>
-	<div class='w3-row ajustado'>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-66.png' alt='Lights' >
-	  	<div class='cursos'><p>Curso 11</p>
-	  		<p>Curso 12</p>
-	  		<p>Curso 13</p>
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-67.png' alt='Lights' >
-		<div class='cursos'>	
-			<p>Curso 14</p>
-			<p>Curso 15</p>  	
-			<p>Curso 16</p>
-		</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-68.png' alt='Lights' >
-	  	<div class='cursos'></div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	  <p>&nbsp;</p>
-	  <p>&nbsp;</p>
-	 </div>
-	</div>
-	<div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-   </div>
-	<div class='w3-row'>
-	<div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	<p>&nbsp;</p>
-	<p>&nbsp;</p>
-   </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-69.png' alt='Lights' >
-	  	<div class='cursos'>
-	  		<p>Curso 17</p>
-	  		<p>Curso 18</p>
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-70.png' alt='Lights' >
-		<div class='cursos'>
-			<p>Curso 19</p>
-		</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-71.png' alt='Lights'>
-	  	<div class='cursos'>
-	  		<p>Curso 20</p>
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-	  <p>&nbsp;</p>
-	  <p>&nbsp;</p>
-	 </div>
-	</div>
-</div>
-<div class='w3-col s12 w3-center'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
-</div>
-<!--Cursos no finalizados-->
-<div class='w3-row'>
-  <div class='w3-col s1 w3-red w3-center w3-border w3-round'>
-    <p>&nbsp;</p>
-  </div>
-  <div class='w3-col s11 w3-container'>
-    <h4>Cursos no finalizados</h4>
-  </div>
-</div>
-<br>
-<br>
-<div class='w3-container'>
-	<div class='w3-row ajustado'>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-66.png' alt='Lights' >
-	  	<div class='cursos'><p>Curso 21</p>
-	  		<p>Curso 22</p>
-	  		<p>Curso 23</p>
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-67.png' alt='Lights' >
-		<div class='cursos'>	
-			<p>Curso 24</p>
-			<p>Curso 25</p>  	
-			<p>Curso 26</p>
-		</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-68.png' alt='Lights' >
-	  	<div class='cursos'></div>
-	  </div>
-	</div>
-	<div class='w3-col s12 w3-center'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	</div>
-	<div class='w3-row'>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-69.png' alt='Lights' >
-	  	<div class='cursos'>
-	  		<p>Curso 27</p>
-	  		<p>Curso 28</p>
-	  	</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-		<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-70.png' alt='Lights' >
-		<div class='cursos'>
-			<p>Curso 29</p>
-		</div>
-	  </div>
-	  <div class='w3-col s12 w3-center w3-hide-medium w3-hide-large'>
-    	<p>&nbsp;</p>
-    	<p>&nbsp;</p>
- 	  </div>
-	  <div class='w3-col s12 m4 w3-center content-block punteado'>
-	  	<img src='https://www.portal3i.mx/2546-Triplei/my/categories/carpeta_-71.png' alt='Lights'>
-	  	<div class='cursos'>
-	  		<p>Curso 30</p>
-	  	</div>
-	  </div>
-	</div>
-</div>";
