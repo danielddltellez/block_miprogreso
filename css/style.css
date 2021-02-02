@@ -137,3 +137,28 @@ flex-wrap: wrap;
     color: #e69987;
 
 }
+
+.oval-proceso {
+    width: 25px;
+    height: 25px;
+    background: #ffeb3b;
+    border-radius: 50%;
+    border: 3px solid #a2a3a1;
+    /*outline: 5px solid black;*/
+  }
+.oval-nfinalizado {
+width: 25px;
+height: 25px;
+background: #f44336;
+border-radius: 50%;
+border: 3px solid #a2a3a1;
+/*outline: 5px solid black;*/
+}
+.oval-finalizado {
+    width: 25px;
+    height: 25px;
+    background: #4caf50;
+    border-radius: 50%;
+    border: 3px solid #a2a3a1;
+    /*outline: 5px solid black;*/
+}

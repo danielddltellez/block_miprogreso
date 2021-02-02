@@ -1,13 +1,13 @@
 <?php 
 require_once ('../../config.php');
-require_once ('vistas.php');
+
 
 
 global $USER, $DB, $COURSE, $OUTPUT, $CFG;
 if ($CFG->forcelogin) {
    require_login();
 }
-
+$idcolaborador=$_GET["idcolaborador"];
 $site = get_site();
 //$PAGE->set_context($context);
 //$PAGE->set_url('/my/index.php', $params);
@@ -15,20 +15,74 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title($title);
 $PAGE->set_heading($fullname);
 echo $OUTPUT->header();
-echo $estilos;
+//echo $idcolaborador;
 
-$sql="select c.id as idcurso, c.fullname AS 'coursename', c.category, c.sortorder,curdate() as diaactual, FROM_UNIXTIME(ue.timestart, '%Y-%m-%d') as 'diferencia',
-datediff(curdate() , FROM_UNIXTIME(ue.timestart, '%Y-%m-%d')) as dif, c.shortname, c.fullname, c.idnumber, c.startdate, c.visible, c.groupmode, c.groupmodeforce, c.cacherev, u.lastaccess,
-IFNULL((SELECT COUNT(cmm.id) FROM {course_modules_completion} cmm JOIN {course_modules} mcm ON mcm.id = cmm.coursemoduleid WHERE cmm.userid = u.id AND mcm.course = c.id AND mcm.visible = 1 AND cmm.completionstate in (1,2)), 0) AS 'activitiescompleted',
-IFNULL((SELECT COUNT(cmc.id) FROM {course_modules} cmc WHERE cmc.course = c.id AND cmc.completion IN (1 , 2) AND cmc.visible = 1 and cmc.deletioninprogress=0), 0) AS 'activitiesassigned',
-(SELECT IF(activitiesassigned != 0,(SELECT IF(activitiescompleted = activitiesassigned,'finalizado',(SELECT IF(dif <= c.daysobj,'enproceso','nofinalizado')))),'n/a')) 
-  AS 'estatus' ,c.daysobj
-FROM {user} u JOIN {user_enrolments} ue ON ue.userid = u.id JOIN {enrol} e ON e.id = ue.enrolid JOIN {course} c ON c.id = e.courseid JOIN {course_categories} cc ON cc.id = c.category
-JOIN {context} AS ctx ON ctx.instanceid = c.id JOIN {role_assignments} AS ra ON ra.contextid = ctx.id JOIN {role} AS r ON r.id = e.roleid
-WHERE ra.userid = u.id AND ctx.instanceid = c.id AND ra.roleid = 5 AND c.visible = 1  AND u.id = ? AND ue.status=0 AND UNIX_TIMESTAMP(curdate()) < ue.timeend
-GROUP BY u.id , c.id , u.lastname , u.firstname , c.fullname , ue.timestart order by cc.id ASC";
 
-$records = $DB->get_records_sql($sql, array($USER->id));
+$btnregresa = new single_button(new moodle_url('/my/'),'Regresar', $buttonadd, 'get');
+$btnregresa->class = 'regresar';
+$btnregresa->formid = 'regresar';
+$btncolaboradores = new single_button(new moodle_url('/blocks/miprogreso/team.php/'),'Colaboradores', $buttonadd, 'get');
+$btncolaboradores->class = 'Colaboradores';
+$btncolaboradores->formid = 'Colaboradores';
+
+
+if(!empty($idcolaborador)){
+
+   $sqlvalidacion="select u.id,  concat(u.firstname,' ',u.lastname) as nombre, u.email as correo
+   from mdl_user u  join mdl_user_info_data d on d.userid=u.id join mdl_user_info_field f on f.id=d.fieldid
+   where u.deleted=0 and u.suspended=0 and f.shortname='ApBoos' and d.data = (select 
+   MAX(IF(f.shortname='noEmpleado', d.data, NULL)) as numeroempjefediecto
+   from mdl_user u  join mdl_user_info_data d on d.userid=u.id join mdl_user_info_field f on f.id=d.fieldid where u.deleted=0 and u.suspended=0 and u.id=?) 
+   and u.id=? GROUP BY u.id, nombre order by nombre asc";
+   $validacionjefe = $DB->get_records_sql($sqlvalidacion, array($USER->id,$idcolaborador));
+   if(empty($validacionjefe)){
+
+      $my = new moodle_url('/blocks/miprogreso/team.php');
+      redirect($my);
+      exit();
+
+   }
+
+   $sql="select c.id as idcurso, c.fullname AS 'coursename', c.category, c.sortorder,curdate() as diaactual, FROM_UNIXTIME(ue.timestart, '%Y-%m-%d') as 'diferencia',
+   datediff(curdate() , FROM_UNIXTIME(ue.timestart, '%Y-%m-%d')) as dif, c.shortname, c.fullname, c.idnumber, c.startdate, c.visible, c.groupmode, c.groupmodeforce, c.cacherev, u.lastaccess,
+   IFNULL((SELECT COUNT(cmm.id) FROM {course_modules_completion} cmm JOIN {course_modules} mcm ON mcm.id = cmm.coursemoduleid WHERE cmm.userid = u.id AND mcm.course = c.id AND mcm.visible = 1 AND cmm.completionstate in (1,2)), 0) AS 'activitiescompleted',
+   IFNULL((SELECT COUNT(cmc.id) FROM {course_modules} cmc WHERE cmc.course = c.id AND cmc.completion IN (1 , 2) AND cmc.visible = 1 and cmc.deletioninprogress=0), 0) AS 'activitiesassigned',
+   (SELECT IF(activitiesassigned != 0,(SELECT IF(activitiescompleted = activitiesassigned,'finalizado',(SELECT IF(dif <= c.daysobj,'enproceso','nofinalizado')))),'n/a')) 
+   AS 'estatus' ,c.daysobj
+   FROM {user} u JOIN {user_enrolments} ue ON ue.userid = u.id JOIN {enrol} e ON e.id = ue.enrolid JOIN {course} c ON c.id = e.courseid JOIN {course_categories} cc ON cc.id = c.category
+   JOIN {context} AS ctx ON ctx.instanceid = c.id JOIN {role_assignments} AS ra ON ra.contextid = ctx.id JOIN {role} AS r ON r.id = e.roleid
+   WHERE ra.userid = u.id AND ctx.instanceid = c.id AND ra.roleid = 5 AND c.visible = 1  AND u.id = ? AND ue.status=0 AND UNIX_TIMESTAMP(curdate()) < ue.timeend
+   GROUP BY u.id , c.id , u.lastname , u.firstname , c.fullname , ue.timestart order by cc.id ASC";
+
+   $records = $DB->get_records_sql($sql, array($idcolaborador));
+   // Aqui inicia En proceso
+   echo $OUTPUT->render($btncolaboradores);
+   require_once ('vistas.php');
+   echo $estilos;
+   echo $cabeceracolaborador;
+   echo $espacio_responsivo;
+
+}else{
+   $sql="select c.id as idcurso, c.fullname AS 'coursename', c.category, c.sortorder,curdate() as diaactual, FROM_UNIXTIME(ue.timestart, '%Y-%m-%d') as 'diferencia',
+   datediff(curdate() , FROM_UNIXTIME(ue.timestart, '%Y-%m-%d')) as dif, c.shortname, c.fullname, c.idnumber, c.startdate, c.visible, c.groupmode, c.groupmodeforce, c.cacherev, u.lastaccess,
+   IFNULL((SELECT COUNT(cmm.id) FROM {course_modules_completion} cmm JOIN {course_modules} mcm ON mcm.id = cmm.coursemoduleid WHERE cmm.userid = u.id AND mcm.course = c.id AND mcm.visible = 1 AND cmm.completionstate in (1,2)), 0) AS 'activitiescompleted',
+   IFNULL((SELECT COUNT(cmc.id) FROM {course_modules} cmc WHERE cmc.course = c.id AND cmc.completion IN (1 , 2) AND cmc.visible = 1 and cmc.deletioninprogress=0), 0) AS 'activitiesassigned',
+   (SELECT IF(activitiesassigned != 0,(SELECT IF(activitiescompleted = activitiesassigned,'finalizado',(SELECT IF(dif <= c.daysobj,'enproceso','nofinalizado')))),'n/a')) 
+   AS 'estatus' ,c.daysobj
+   FROM {user} u JOIN {user_enrolments} ue ON ue.userid = u.id JOIN {enrol} e ON e.id = ue.enrolid JOIN {course} c ON c.id = e.courseid JOIN {course_categories} cc ON cc.id = c.category
+   JOIN {context} AS ctx ON ctx.instanceid = c.id JOIN {role_assignments} AS ra ON ra.contextid = ctx.id JOIN {role} AS r ON r.id = e.roleid
+   WHERE ra.userid = u.id AND ctx.instanceid = c.id AND ra.roleid = 5 AND c.visible = 1  AND u.id = ? AND ue.status=0 AND UNIX_TIMESTAMP(curdate()) < ue.timeend
+   GROUP BY u.id , c.id , u.lastname , u.firstname , c.fullname , ue.timestart order by cc.id ASC";
+
+   $records = $DB->get_records_sql($sql, array($USER->id));
+   // Aqui inicia En proceso
+   echo $OUTPUT->render($btnregresa);
+   require_once ('vistas.php');
+   echo $estilos;
+   echo $cabeceraprincipal;
+   echo $espacio_responsivo;
+
+}
 
 $finalizados=[];
 $enproceso=[];
@@ -66,9 +120,6 @@ $nombrecurso=$value->coursename;
 }
 
 // Aqui inicia En proceso
-
-echo $cabeceraprincipal;
-echo $espacio_responsivo;
 $categoria1e=[];
 //agrupar();
 $categoria2e=[];
@@ -415,6 +466,6 @@ if (!empty($categoria6e)) {
 }
 
 // Aqui finaliza en proceso
- echo $OUTPUT->footer();
+// echo $OUTPUT->footer();
 
  

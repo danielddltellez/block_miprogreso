@@ -14,6 +14,12 @@ $cabeceraprincipal='<div class="w3-container w3-center">
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php" class="w3-btn w3-yellow">En proceso</a>
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php" class="w3-btn w3-red">No finalizado</a>
 </div>';
+$cabeceracolaborador='<div class="w3-container w3-center">
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-green">Finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-yellow">En proceso</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-red">No finalizado</a>
+</div>';
+
 
 $cabezerafinalizados="<div class='w3-row'>
 						<div class='w3-col s12 w3-center'>
