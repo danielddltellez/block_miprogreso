@@ -108,7 +108,7 @@ $this->content->text .='<h3 style="text-align: center;">Cursos</h3><div><div cla
   <div
     class="progress-bar"
     role="progressbar"
-    style="width: '.$promedio1.'%; background-color: #ffeb3b;"
+    style="width: '.$promedio1.'%; background-color: #ffeb3b; color:#000; font-weight: bold;"
     aria-valuenow="'.$totalp.'"
     aria-valuemin="0"
     aria-valuemax="'.$sumatotal.'"
@@ -116,13 +116,13 @@ $this->content->text .='<h3 style="text-align: center;">Cursos</h3><div><div cla
   '.$totalp.'
   </div>
 </div>
-<div style="top: -19px; position: relative; text-align: center; font-size: 17px;"><a style="color: #636363" href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php">En proceso</a></div>
+<div class="titulo-progress"><a  href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php">En proceso</a></div>
 </div>';
 $this->content->text .='<div><div class="progress" style="height: 20px; background-color: #f3f2f1 !important;">
   <div
     class="progress-bar"
     role="progressbar"
-    style="width: '.$promedio2.'%; background-color: #f44336;"
+    style="width: '.$promedio2.'%; background-color: #f44336; color:#000; font-weight: bold;"
     aria-valuenow="'.$totalnfi.'"
     aria-valuemin="0"
     aria-valuemax="'.$sumatotal.'"
@@ -130,13 +130,13 @@ $this->content->text .='<div><div class="progress" style="height: 20px; backgrou
   '.$totalnfi.'
   </div>
 </div>
-<div style="top: -19px; position: relative; text-align: center; font-size: 17px;"><a style="color: #636363" href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php">No finalizado</a></div>
+<div class="titulo-progress"><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php">No finalizado</a></div>
 </div>';
 $this->content->text .='<div><div class="progress" style="height: 20px; background-color: #f3f2f1  !important;">
   <div
     class="progress-bar"
     role="progressbar"
-    style="width: '.$promedio3.'%; background-color: #4caf50;"
+    style="width: '.$promedio3.'%; background-color: #4caf50; color:#000; font-weight: bold;"
     aria-valuenow="'.$totalfin.'"
     aria-valuemin="0"
     aria-valuemax="'.$sumatotal.'"
@@ -144,13 +144,28 @@ $this->content->text .='<div><div class="progress" style="height: 20px; backgrou
   '.$totalfin.'
   </div>
 </div>
-<div style="top: -19px; position: relative; text-align: center; font-size: 17px;"><a style="color: #636363" href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php">Finalizado</a></div>
-</div>';
+<div class="titulo-progress"><a  href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php">Finalizado</a></div>
+</div><br><br>';
 if($rolusuario=='JEFE INMEDIATO'){
 $this->content->text .='<div style="top: -19px; position: relative; text-align: center; font-size: 17px;">
 <a style="color: #636363" href="'.$CFG->wwwroot.'/blocks/miprogreso/team.php"><i class="glyphicon glyphicon-user" style="color:#e69987"></i>  Seguimiento a mi equipo</a></div>
 </div>';
 }
+
+$this->content->text .='<style>
+.titulo-progress{
+  top: -19px;
+  position: relative; 
+  text-align: center; 
+  font-size: 17px;
+}
+.titulo-progress > a{
+  color: #636363;
+}
+.titulo-progress > a:hover{
+  color: #e69987 !important;
+}
+</style>';
 
 
 /*

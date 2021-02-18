@@ -26,13 +26,14 @@ $btncolaboradores->class = 'Colaboradores';
 $btncolaboradores->formid = 'Colaboradores';
 
 
+
 if(!empty($idcolaborador)){
 
    $sqlvalidacion="select u.id,  concat(u.firstname,' ',u.lastname) as nombre, u.email as correo
-   from mdl_user u  join mdl_user_info_data d on d.userid=u.id join mdl_user_info_field f on f.id=d.fieldid
+   from {user} u  join {user_info_data} d on d.userid=u.id join {user_info_field} f on f.id=d.fieldid
    where u.deleted=0 and u.suspended=0 and f.shortname='ApBoos' and d.data = (select 
    MAX(IF(f.shortname='noEmpleado', d.data, NULL)) as numeroempjefediecto
-   from mdl_user u  join mdl_user_info_data d on d.userid=u.id join mdl_user_info_field f on f.id=d.fieldid where u.deleted=0 and u.suspended=0 and u.id=?) 
+   from {user} u  join {user_info_data} d on d.userid=u.id join {user_info_field} f on f.id=d.fieldid where u.deleted=0 and u.suspended=0 and u.id=?) 
    and u.id=? GROUP BY u.id, nombre order by nombre asc";
    $validacionjefe = $DB->get_records_sql($sqlvalidacion, array($USER->id,$idcolaborador));
    if(empty($validacionjefe)){
@@ -40,6 +41,13 @@ if(!empty($idcolaborador)){
       $my = new moodle_url('/blocks/miprogreso/team.php');
       redirect($my);
       exit();
+
+   }else{
+      foreach($validacionjefe as $datausuario){
+
+         $nombreusuario=$datausuario->nombre;
+      }
+
 
    }
 
@@ -57,9 +65,12 @@ if(!empty($idcolaborador)){
    $records = $DB->get_records_sql($sql, array($idcolaborador));
    // Aqui inicia En proceso
    echo $OUTPUT->render($btncolaboradores);
+   echo '<br><br>';
    require_once ('vistas.php');
    echo $estilos;
    echo $cabeceracolaborador;
+   echo $espacio_responsivo;
+   echo '<div class="w3-center"><h3>'.$nombreusuario.'</h3></div>';
    echo $espacio_responsivo;
 
 }else{
@@ -186,7 +197,7 @@ echo "<div class='w3-container'>
 if(!empty($categoria1e)){
    
    echo "<div class='w3-col s12 m4 w3-center content-block punteado'>
-            <img src='img/carpeta_-66.png' class='imgprogreso'>
+            <img src='img/induccion.png' class='imgprogreso'>
                <div class='cursos-contenedor w3-center'>";
    $contador1=count($categoria1e);
    echo '<div class="caja1">
@@ -219,7 +230,7 @@ if(!empty($categoria1e)){
    
 }else{
    echo "<div class='w3-col s12 m4 w3-center content-block punteado'>
-         <img src='img/carpeta_-66.png' class='imgprogreso'>
+         <img src='img/induccion.png' class='imgprogreso'>
             <div class='cursos-contenedor w3-center'>";
    echo '<div class="caja1">
             <p>0</p>
@@ -234,7 +245,7 @@ if(!empty($categoria1e)){
 
 if (!empty($categoria2e)) {
    echo "<div class='w3-col l4 s12 m4 w3-center content-block punteado'>
-            <img src='img/carpeta_-67.png' class='imgprogreso'>
+            <img src='img/liderazgo.png' class='imgprogreso'>
                   <div class='cursos-contenedor w3-center'>";
    $contador2=count($categoria2e);
    echo '<div class="caja1">
@@ -267,7 +278,7 @@ if (!empty($categoria2e)) {
    echo $espacio_responsivo;
 }else{
    echo "<div class='w3-col s12 m4 w3-center content-block punteado'>
-         <img src='img/carpeta_-67.png' class='imgprogreso'>
+         <img src='img/liderazgo.png' class='imgprogreso'>
             <div class='cursos-contenedor w3-center'>";
    echo '<div class="caja1">
             <p>0</p>
@@ -282,7 +293,7 @@ if (!empty($categoria2e)) {
 
 if (!empty($categoria3e)) {
    echo "<div class='w3-col l4 s12 m4 w3-center content-block punteado'>
-         <img src='img/carpeta_-68.png' class='imgprogreso'>
+         <img src='img/normativas.png' class='imgprogreso'>
             <div class='cursos-contenedor w3-center'>";
    $contador3=count($categoria3e);
    echo '<div class="caja1">
@@ -314,7 +325,7 @@ if (!empty($categoria3e)) {
    echo $espacio_responsivo;
 }else{
    echo "<div class='w3-col s12 m4 w3-center content-block punteado'>
-         <img src='img/carpeta_-68.png' class='imgprogreso'>
+         <img src='img/normativas.png' class='imgprogreso'>
             <div class='cursos-contenedor w3-center'>";
    echo '<div class="caja1">
             <p>0</p>
@@ -329,7 +340,7 @@ if (!empty($categoria3e)) {
 
 if (!empty($categoria4e)) {
    echo "<div class='w3-col l4 s12 m4 w3-center content-block punteado'>
-            <img src='img/carpeta_-69.png' class='imgprogreso'>
+            <img src='img/educacion.png' class='imgprogreso'>
                <div class='cursos-contenedor w3-center'>";
    $contador4=count($categoria4e);
    echo '<div class="caja1">
@@ -360,7 +371,7 @@ if (!empty($categoria4e)) {
    echo $espacio_responsivo;
 }else{
    echo "<div class='w3-col s12 m4 w3-center content-block punteado'>
-         <img src='img/carpeta_-69.png' class='imgprogreso'>
+         <img src='img/educacion.png' class='imgprogreso'>
             <div class='cursos-contenedor w3-center'>";
    echo '<div class="caja1">
             <p>0</p>
@@ -375,7 +386,7 @@ if (!empty($categoria4e)) {
 
 if (!empty($categoria5e)) {
    echo "<div class='w3-col l4 s12 m4 w3-center content-block punteado'>
-            <img src='img/carpeta_-70.png' class='imgprogreso'>
+            <img src='img/objetivos.png' class='imgprogreso'>
                <div class='cursos-contenedor w3-center'>";
    $contador5=count($categoria5e);
    echo '<div class="caja1">
@@ -407,7 +418,7 @@ if (!empty($categoria5e)) {
 
 }else{
    echo "<div class='w3-col s12 m4 w3-center content-block punteado'>
-         <img src='img/carpeta_-70.png' class='imgprogreso'>
+         <img src='img/objetivos.png' class='imgprogreso'>
             <div class='cursos-contenedor w3-center'>";
    echo '<div class="caja1">
             <p>0</p>
@@ -422,7 +433,7 @@ if (!empty($categoria5e)) {
 
 if (!empty($categoria6e)) {
    echo "<div class='w3-col l4 s12 m4 w3-center content-block punteado'>
-            <img src='img/carpeta_-71.png' class='imgprogreso'>
+            <img src='img/encuestas.png' class='imgprogreso'>
                <div class='cursos-contenedor w3-center'>";
    $contador6=count($categoria6e);
    echo '<div class="caja1">
@@ -453,7 +464,7 @@ if (!empty($categoria6e)) {
    echo $espacio_responsivo;
 }else{
    echo "<div class='w3-col s12 m4 w3-center content-block punteado'>
-         <img src='img/carpeta_-71.png' class='imgprogreso'>
+         <img src='img/encuestas.png' class='imgprogreso'>
             <div class='cursos-contenedor w3-center'>";
    echo '<div class="caja1">
             <p>0</p>
@@ -467,6 +478,6 @@ if (!empty($categoria6e)) {
 }
 
 // Aqui finaliza en proceso
-//echo $OUTPUT->footer();
+echo $OUTPUT->footer();
 
  

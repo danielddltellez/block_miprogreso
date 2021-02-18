@@ -66,9 +66,9 @@ echo '<div class="w3-container w3-responsive" style="width: 100%;">
   <thead>
     <tr class="w3-light-grey">
       <th>Colaborador</th>
-      <th><div class="oval-proceso"></div></th>
-      <th><div class="oval-nfinalizado"></div></th>
-      <th><div class="oval-finalizado"></div></th>
+      <th><div class="oval-proceso"></div><p>En proceso</p></th>
+      <th><div class="oval-nfinalizado"></div><p>No finalizado</p></th>
+      <th><div class="oval-finalizado"></div><p>Finalizado</p></th>
     </tr>
   </thead>';
 foreach($listacolaboradores as $values){
@@ -208,9 +208,9 @@ GROUP BY
    }
   echo '<tr class="w3-hover-light-gray">
             <td><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'">'.$nombrecolaborado.'</a></td>
-            <td>'.$totalp.'</td>
-            <td>'.$totalnfi.'</td>
-            <td>'.$totalfin.'</td>
+            <td><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'">'.$totalp.'</a></td>
+            <td><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'">'.$totalnfi.'</a></td>
+            <td><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'">'.$totalfin.'</a></td>
          </tr>';
 
 
@@ -221,7 +221,7 @@ echo'</table>
 
 
 // Aqui finaliza en proceso
-//echo $OUTPUT->footer();
+echo $OUTPUT->footer();
 
 
 

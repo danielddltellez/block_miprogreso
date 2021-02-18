@@ -162,3 +162,29 @@ border: 3px solid #a2a3a1;
     border: 3px solid #a2a3a1;
     /*outline: 5px solid black;*/
 }
+
+.regresar{
+    padding-bottom: 10px;
+    padding-top: 3%;
+}
+.colaboradores{
+    padding-bottom: 10px;
+    padding-top: 3%;
+}
+
+.flecha{
+    font-size: 20px;
+    color: #e69987;
+    font-weight: bold;
+}
+
+.pos{
+    position: relative;
+    top:10px;
+}
+.bodersolido{
+    border-color: #e69987 !important;
+    border-width: 6px !important;
+    border-style: inset !important;
+
+}
