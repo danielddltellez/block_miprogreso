@@ -62,13 +62,18 @@ GROUP BY u.id, nombre
 order by nombre asc";
 $listacolaboradores = $DB->get_records_sql($sql, array($idusuario));
 echo '<div class="w3-container w3-responsive" style="width: 100%;">
+<div class="w3-row">
+<div class="w3-col m2 l2">
+<p></p>
+</div>
+<div class="w3-col m8 l8">
 <table class="w3-table-all">
   <thead>
-    <tr class="w3-light-grey">
-      <th>Colaborador</th>
-      <th><div class="oval-proceso"></div><p>En proceso</p></th>
-      <th><div class="oval-nfinalizado"></div><p>No finalizado</p></th>
-      <th><div class="oval-finalizado"></div><p>Finalizado</p></th>
+    <tr class="w3-light-grey w3-center">
+      <th >Colaborador</th>
+      <th class="w3-center"><div class="oval-proceso w3-center"></div><p class="ajuste-texto w3-center">En proceso</p></th>
+      <th class="w3-center"><div class="oval-nfinalizado w3-center"></div><p class="ajuste-texto w3-center">No finalizado</p></th>
+      <th class="w3-center"><div class="oval-finalizado w3-center"></div><p class="ajuste-texto w3-center">Finalizado</p></th>
     </tr>
   </thead>';
 foreach($listacolaboradores as $values){
@@ -206,17 +211,21 @@ GROUP BY
       $totalp=0;
 
    }
-  echo '<tr class="w3-hover-light-gray">
+  echo '<tr class="w3-hover-light-gray w3-center">
             <td><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'">'.$nombrecolaborado.'</a></td>
-            <td><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'">'.$totalp.'</a></td>
-            <td><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'">'.$totalnfi.'</a></td>
-            <td><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'">'.$totalfin.'</a></td>
+            <td  class="w3-center"><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'">'.$totalp.'</a></td>
+            <td  class="w3-center"><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'">'.$totalnfi.'</a></td>
+            <td  class="w3-center"><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'">'.$totalfin.'</a></td>
          </tr>';
 
 
 }
 echo'</table>
-</div>';
+</div>
+<div class="w3-col m2 l2">
+<p></p>
+</div>
+</div></div>';
 
 
 

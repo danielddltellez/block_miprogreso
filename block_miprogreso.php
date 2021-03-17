@@ -104,48 +104,65 @@ $promedio3=round($promedio3, 2);
 
 
 
-$this->content->text .='<h3 style="text-align: center;">Cursos</h3><div><div class="progress" style="height: 20px; background-color: #f3f2f1 !important;">
+$this->content->text .='<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"><div><div class="progress" style="height: 30px; background-color: #E6E6E6 !important;">
   <div
     class="progress-bar"
-    role="progressbar"
-    style="width: '.$promedio1.'%; background-color: #ffeb3b; color:#000; font-weight: bold;"
-    aria-valuenow="'.$totalp.'"
+    role="progressbar"';
+if(!empty($promedio1)){
+  $this->content->text .='style="width: '.$promedio1.'%; background-color: #ffb624; color:#fff; font-weight: bold;"';
+}else{
+  $this->content->text .='style="width: '.$promedio1.'%; background-color: #ffb624; color:#9a9a9a; font-weight: bold;"';
+}
+
+$this->content->text .='aria-valuenow="'.$totalp.'"
     aria-valuemin="0"
     aria-valuemax="'.$sumatotal.'"
   >
-  '.$totalp.'
+  <p class="text-progreso">'.$totalp.'</p>
   </div>
 </div>
-<div class="titulo-progress"><a  href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php">En proceso</a></div>
+<div class="titulo-progress"><a  href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php"><i class="fa fa-search"></i> En proceso</a></div>
 </div>';
-$this->content->text .='<div><div class="progress" style="height: 20px; background-color: #f3f2f1 !important;">
+$this->content->text .='<div><div class="progress" style="height: 30px; background-color: #E6E6E6 !important;">
   <div
     class="progress-bar"
-    role="progressbar"
-    style="width: '.$promedio2.'%; background-color: #f44336; color:#000; font-weight: bold;"
-    aria-valuenow="'.$totalnfi.'"
+    role="progressbar"';
+    if(!empty($promedio2)){
+      $this->content->text .='style="width: '.$promedio2.'%; background-color: #f42727; color:#fff; font-weight: bold;"';
+    }else{
+      $this->content->text .='style="width: '.$promedio2.'%; background-color: #f42727; color:#9a9a9a; font-weight: bold;"';
+    }
+    
+$this->content->text .='aria-valuenow="'.$totalnfi.'"
     aria-valuemin="0"
     aria-valuemax="'.$sumatotal.'"
   >
-  '.$totalnfi.'
+  <p class="text-progreso">'.$totalnfi.'</p>
   </div>
 </div>
-<div class="titulo-progress"><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php">No finalizado</a></div>
+<div class="titulo-progress"><a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php"><i class="fa fa-search"></i> No finalizado</a></div>
 </div>';
-$this->content->text .='<div><div class="progress" style="height: 20px; background-color: #f3f2f1  !important;">
+$this->content->text .='<div><div class="progress" style="height: 30px; background-color: #E6E6E6  !important;">
   <div
     class="progress-bar"
-    role="progressbar"
-    style="width: '.$promedio3.'%; background-color: #4caf50; color:#000; font-weight: bold;"
-    aria-valuenow="'.$totalfin.'"
+    role="progressbar"';
+    if(!empty($promedio3)){
+      $this->content->text .='style="width: '.$promedio3.'%; background-color: #5cc600; color:#fff; font-weight: bold;"';
+    }else{
+      $this->content->text .='style="width: '.$promedio3.'%; background-color: #5cc600; color:#9a9a9a; font-weight: bold;"';
+    }
+    
+$this->content->text .='aria-valuenow="'.$totalfin.'"
     aria-valuemin="0"
     aria-valuemax="'.$sumatotal.'"
   >
-  '.$totalfin.'
+  <p class="text-progreso">'.$totalfin.'</p>
   </div>
 </div>
-<div class="titulo-progress"><a  href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php">Finalizado</a></div>
-</div><br><br>';
+<div class="titulo-progress"><a  href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php"><i class="fa fa-search"></i> Finalizado</a></div>
+</div>
+<br><center><p>Total de cursos: '.$finaltotal.'</p></center><br>';
 if($rolusuario=='JEFE INMEDIATO'){
 $this->content->text .='<div style="top: -19px; position: relative; text-align: center; font-size: 17px;">
 <a style="color: #636363" href="'.$CFG->wwwroot.'/blocks/miprogreso/team.php"><i class="glyphicon glyphicon-user" style="color:#e69987"></i>  Seguimiento a mi equipo</a></div>
@@ -165,6 +182,27 @@ $this->content->text .='<style>
 .titulo-progress > a:hover{
   color: #e69987 !important;
 }
+.text-progreso{
+
+  width: 100% !important;
+  position: absolute;
+   margin-left: 5%;
+   margin-top: 2%;
+
+}
+
+.progress-bar {
+
+  text-align: left !important;
+
+}
+
+.block_miprogreso > .content{
+  border: solid 10px #e6e6e6 !important;
+  border-bottom: solid 27px #e6e6e6 !important;
+}
+
+
 </style>';
 
 

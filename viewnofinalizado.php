@@ -63,8 +63,7 @@ if(!empty($idcolaborador)){
 
    $records = $DB->get_records_sql($sql, array($idcolaborador));
    // Aqui inicia En proceso
-   echo $OUTPUT->render($btncolaboradores);
-   echo '<br><br>';
+
    require_once ('vistas.php');
    echo $estilos;
    echo $cabeceracolaborador2;
@@ -86,7 +85,6 @@ if(!empty($idcolaborador)){
 
    $records = $DB->get_records_sql($sql, array($USER->id));
    // Aqui inicia En proceso
-   echo $OUTPUT->render($btnregresa);
    require_once ('vistas.php');
    echo $estilos;
    echo $cabeceraprincipal2;
@@ -202,7 +200,7 @@ if(!empty($categoria1e)){
             <p>'.$contador1.'</p>
          </div>';
    echo '<div class="caja2">';
-   $salida1e = array_slice($categoria1e, 0, 4); 
+   $salida1e = array_slice($categoria1e, 0, 1);
 
    foreach($salida1e as $valores1e){
 
@@ -212,7 +210,7 @@ if(!empty($categoria1e)){
       
    } 
    echo"</div><br style='clear:both'/>";
-   echo  '<div class="popup" onclick="popuniversidad(1)">Ver mas..
+   echo  '<div class="popup" onclick="popuniversidad(1)">Ver más...
             <span class="popuptext" id="myPopup_1">';
    foreach($categoria1e as $valorpop1e){
 
@@ -234,7 +232,7 @@ if(!empty($categoria1e)){
             <p>0</p>
          </div>';
    echo '<div class="caja2"><p style="font-size: 12px;">&nbsp;</p>';
-   echo "</div><br style='clear:both'/>";
+   echo "</div><br style='clear:both'/><div><span>&nbsp;</span></div>";
    echo"</div></div>";
    echo $espacio_responsivo;
 
@@ -250,7 +248,7 @@ if (!empty($categoria2e)) {
             <p>'.$contador2.'</p>
          </div>';
    echo '<div class="caja2">';
-   $salida2e = array_slice($categoria2e, 0, 4); 
+   $salida2e = array_slice($categoria2e, 0, 1);
    foreach($salida2e as $valores2e){
 
       $idcursof2e=$valores2e['idcurso'];
@@ -260,7 +258,7 @@ if (!empty($categoria2e)) {
 
    }
    echo"</div><br style='clear:both'/>";
-   echo  '<div class="popup" onclick="popuniversidad(2)">Ver mas..
+   echo  '<div class="popup" onclick="popuniversidad(2)">Ver más...
             <span class="popuptext" id="myPopup_2">';
    foreach($categoria2e as $valorpop2e){
 
@@ -282,7 +280,7 @@ if (!empty($categoria2e)) {
             <p>0</p>
          </div>';
    echo '<div class="caja2"><p style="font-size: 12px;">&nbsp;</p>';
-   echo "</div><br style='clear:both'/>";
+   echo "</div><br style='clear:both'/><div><span>&nbsp;</span></div>";
    echo"</div></div>";
    echo $espacio_responsivo;
 
@@ -298,7 +296,7 @@ if (!empty($categoria3e)) {
             <p>'.$contador3.'</p>
          </div>';
    echo '<div class="caja2">';
-   $salida3e = array_slice($categoria3e, 0, 4); 
+   $salida3e = array_slice($categoria3e, 0, 1);
    foreach($salida3e as $valores3e){
 
       $idcursof3e=$valores3e['idcurso'];
@@ -308,7 +306,7 @@ if (!empty($categoria3e)) {
 
    }
    echo"</div><br style='clear:both'/>";
-   echo  '<div class="popup" onclick="popuniversidad(3)">Ver mas..
+   echo  '<div class="popup" onclick="popuniversidad(3)">Ver más...
             <span class="popuptext" id="myPopup_3">';
    foreach($categoria3e as $valorpop3e){
 
@@ -329,7 +327,7 @@ if (!empty($categoria3e)) {
             <p>0</p>
          </div>';
    echo '<div class="caja2"><p style="font-size: 12px;">&nbsp;</p>';
-   echo "</div><br style='clear:both'/>";
+   echo "</div><br style='clear:both'/><div><span>&nbsp;</span></div>";
    echo"</div></div>";
    echo $espacio_responsivo;
 
@@ -345,7 +343,7 @@ if (!empty($categoria4e)) {
             <p>'.$contador4.'</p>
          </div>';
    echo '<div class="caja2">';
-   $salida4e = array_slice($categoria4e, 0, 4); 
+   $salida4e = array_slice($categoria4e, 0, 1);
    foreach($salida4e as $valores4e){
 
       $idcursof4e=$valores4e['idcurso'];
@@ -355,7 +353,7 @@ if (!empty($categoria4e)) {
 
    }
    echo"</div><br style='clear:both'/>";
-   echo  '<div class="popup" onclick="popuniversidad(4)">Ver mas..
+   echo  '<div class="popup" onclick="popuniversidad(4)">Ver más...
             <span class="popuptext" id="myPopup_4">';
    foreach($categoria4e as $valorpop4e){
 
@@ -375,7 +373,7 @@ if (!empty($categoria4e)) {
             <p>0</p>
          </div>';
    echo '<div class="caja2"><p style="font-size: 12px;">&nbsp;</p>';
-   echo "</div><br style='clear:both'/>";
+   echo "</div><br style='clear:both'/><div><span>&nbsp;</span></div>";
    echo"</div></div>";
    echo $espacio_responsivo;
 
@@ -391,7 +389,7 @@ if (!empty($categoria5e)) {
             <p>'.$contador5.'</p>
          </div>';
    echo '<div class="caja2">';
-   $salida5e = array_slice($categoria5e, 0, 4); 
+   $salida5e = array_slice($categoria5e, 0, 1);
    foreach($salida5e as $valores5e){
 
       $idcursof5e=$valores5e['idcurso'];
@@ -401,7 +399,7 @@ if (!empty($categoria5e)) {
 
    }
    echo"</div><br style='clear:both'/>";
-   echo  '<div class="popup" onclick="popuniversidad(5)">Ver mas..
+   echo  '<div class="popup" onclick="popuniversidad(5)">Ver más...
             <span class="popuptext" id="myPopup_5">';
    foreach($categoria5e as $valorpop5e){
 
@@ -422,7 +420,7 @@ if (!empty($categoria5e)) {
             <p>0</p>
          </div>';
    echo '<div class="caja2"><p style="font-size: 12px;">&nbsp;</p>';
-   echo "</div><br style='clear:both'/>";
+   echo "</div><br style='clear:both'/><div><span>&nbsp;</span></div>";
    echo"</div></div>";
    echo $espacio_responsivo;
 
@@ -438,7 +436,7 @@ if (!empty($categoria6e)) {
             <p>'.$contador6.'</p>
          </div>';
    echo '<div class="caja2">';
-   $salida6e = array_slice($categoria6e, 0, 4); 
+   $salida6e = array_slice($categoria6e, 0, 1);
    foreach($salida6e as $valores6e){
 
       $idcursof6e=$valores6e['idcurso'];
@@ -448,7 +446,7 @@ if (!empty($categoria6e)) {
 
    }
    echo"</div><br style='clear:both'/>";
-   echo  '<div class="popup" onclick="popuniversidad(6)">Ver mas..
+   echo  '<div class="popup" onclick="popuniversidad(6)">Ver más...
             <span class="popuptext" id="myPopup_6">';
    foreach($categoria6e as $valorpop6e){
 
@@ -468,10 +466,22 @@ if (!empty($categoria6e)) {
             <p>0</p>
          </div>';
    echo '<div class="caja2"><p style="font-size: 12px;">&nbsp;</p>';
-   echo "</div><br style='clear:both'/>";
+   echo "</div><br style='clear:both'/><div><span>&nbsp;</span></div>";
    echo"</div></div>";
    echo $espacio_responsivo;
 
+
+}
+
+if(!empty($idcolaborador)){
+
+   // Aqui inicia En proceso
+   echo $OUTPUT->render($btncolaboradores);
+
+
+}else{
+// Aqui inicia En proceso
+echo $OUTPUT->render($btnregresa);
 
 }
 

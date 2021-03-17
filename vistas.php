@@ -11,44 +11,44 @@ $estilos="<!DOCTYPE html>
 
 $cabeceraprincipal='<div class="w3-container w3-center">
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php" class="flecha"><i class="fa fa-caret-left fa-2x pos" aria-hidden="true"></i></a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php" class="w3-btn w3-green">Finalizado</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php" class="w3-btn w3-yellow bodersolido">En proceso</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php" class="w3-btn w3-red">No finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php" class="w3-btn fincolor">Finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php" class="w3-btn bodersolido2">En proceso</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php" class="w3-btn nfincolor">No finalizado</a>
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php" class="flecha"><i class="fa fa-caret-right fa-2x pos" aria-hidden="true"></i></a>
 </div>';
 $cabeceraprincipal1='<div class="w3-container w3-center">
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php" class="flecha"><i class="fa fa-caret-left fa-2x pos" aria-hidden="true"></i></a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php" class="w3-btn w3-green bodersolido">Finalizado</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php" class="w3-btn w3-yellow">En proceso</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php" class="w3-btn w3-red">No finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php" class="w3-btn bodersolido1">Finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php" class="w3-btn procolor">En proceso</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php" class="w3-btn nfincolor">No finalizado</a>
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php" class="flecha"><i class="fa fa-caret-right fa-2x pos" aria-hidden="true"></i></a>
 </div>';
 $cabeceraprincipal2='<div class="w3-container w3-center">
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php" class="flecha"><i class="fa fa-caret-left fa-2x pos" aria-hidden="true"></i></a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php" class="w3-btn w3-green">Finalizado</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php" class="w3-btn w3-yellow">En proceso</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php" class="w3-btn w3-red bodersolido">No finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php" class="w3-btn fincolor">Finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php" class="w3-btn procolor">En proceso</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php" class="w3-btn bodersolido3">No finalizado</a>
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php" class="flecha"><i class="fa fa-caret-right fa-2x pos" aria-hidden="true"></i></a>
 </div>';
 $cabeceracolaborador='<div class="w3-container w3-center">
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'"  class="flecha"><i class="fa fa-caret-left fa-2x pos" aria-hidden="true"></i></a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-green">Finalizado</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-yellow bodersolido">En proceso</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-red">No finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn fincolor">Finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'" class="w3-btn bodersolido2">En proceso</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn nfincolor">No finalizado</a>
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'" class="flecha"><i class="fa fa-caret-right fa-2x pos" aria-hidden="true"></i></a>
 </div>';
 $cabeceracolaborador1='<div class="w3-container w3-center">
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'"  class="flecha"><i class="fa fa-caret-left fa-2x pos" aria-hidden="true"></i></a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-green bodersolido">Finalizado</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-yellow">En proceso</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-red">No finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn  bodersolido1">Finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'" class="w3-btn procolor">En proceso</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn nfincolor">No finalizado</a>
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'" class="flecha"><i class="fa fa-caret-right fa-2x pos" aria-hidden="true"></i></a>
 </div>';
 $cabeceracolaborador2='<div class="w3-container w3-center">
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'"  class="flecha"><i class="fa fa-caret-left fa-2x pos" aria-hidden="true"></i></a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-green">Finalizado</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-yellow">En proceso</a>
-<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn w3-red bodersolido">No finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn fincolor">Finalizado</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewproceso.php?idcolaborador='.$idcolaborador.'" class="w3-btn procolor">En proceso</a>
+<a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewnofinalizado.php?idcolaborador='.$idcolaborador.'" class="w3-btn bodersolido3">No finalizado</a>
 <a href="'.$CFG->wwwroot.'/blocks/miprogreso/viewfinalizado.php?idcolaborador='.$idcolaborador.'" class="flecha"><i class="fa fa-caret-right fa-2x pos" aria-hidden="true"></i></a>
 </div>';
 
@@ -58,7 +58,7 @@ $cabezerafinalizados="<div class='w3-row'>
       						<p>&nbsp;</p>
       						<p>&nbsp;</p>
 						</div>
-						<div class='w3-col s1 w3-green w3-center w3-border w3-round'>
+						<div class='w3-col s1 fincolor w3-center w3-border w3-round'>
    							<p>&nbsp;</p>
 					  	</div>
 					  	<div class='w3-col s11 w3-container'>
@@ -76,7 +76,7 @@ $cabeceranofinalizados="<div class='w3-row'>
 								<p>&nbsp;</p>
 								<p>&nbsp;</p>
 							</div>-->
-							<div class='w3-col s1 w3-red w3-center w3-border w3-round'>
+							<div class='w3-col s1 nfincolor w3-center w3-border w3-round'>
 							<p>&nbsp;</p>
 							</div>
 							<div class='w3-col s11 w3-container'>
@@ -94,7 +94,7 @@ $cabeceraenproceso="<div class='w3-row'>
 							<p>&nbsp;</p>
 							<p>&nbsp;</p>
 						</div>-->
-						<div class='w3-col s1 w3-yellow w3-center w3-border w3-round'>
+						<div class='w3-col s1 procolor w3-center w3-border w3-round'>
 						<p>&nbsp;</p>
 						</div>
 						<div class='w3-col s11 w3-container'>
